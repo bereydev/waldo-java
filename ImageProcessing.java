@@ -12,6 +12,19 @@ public final class ImageProcessing {
  	int [] [] rgbImage = Helper.read("charlie.png");
  	
  	
+ 	int[][] image = new int[0][0];
+    double[][] grayImage = new double[0][0];
+
+    int rgb = 0;
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+    double gray = 0;
+    double factor = 0;
+    
+    int intResult;
+    double doubleResult;
+    boolean boolResult;
 
     public static int getRed(int rgb) {
     	
@@ -30,6 +43,10 @@ public final class ImageProcessing {
     	return resultat;
     }
 
+    int resultat1;
+    int resultat2;
+    int resultat3;
+    
     /**
      * Returns green component from given packed color.
      * @param rgb : a 32-bits RGB color
@@ -61,8 +78,8 @@ public final class ImageProcessing {
      * @see #getRGB(int, int, int)
      */
     public static int getBlue(int rgb) {
-    	int resultat= rgb & 0xff;
-    	    	if (resultat<0) {
+    	int resultat = rgb & 0xff;
+    	    	if (resultat <0) {
     	     		return 0;
     			}else if (resultat > 255) {
     	 			return 255;
@@ -81,8 +98,13 @@ public final class ImageProcessing {
      * @see #getRGB(int)
      */
     public static double getGray(int rgb) {
-    	// TODO implement me !
-        return -2;
+    	
+    	int Result = ImageProcessing.getRed(rgb);
+    int Result2 = ImageProcessing.getGreen(rgb);	
+    int Result3 = ImageProcessing.getBlue(rgb);
+    	
+    double gray = (Result + Result2 + Result3) / 3 ;
+        return gray;
     }
 
     /**
@@ -96,8 +118,11 @@ public final class ImageProcessing {
      * @see #getBlue
      */
     public static int getRGB(int red, int green, int blue) {
-    	// TODO implement me !
-    	return -2; 
+    	
+    int 	intResult = ImageProcessing.getRGB(red, green, blue);
+    	
+
+    	 return intResult;
     }
 
     /**
