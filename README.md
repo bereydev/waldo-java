@@ -4,6 +4,7 @@ Mini-projet d'informatique, à rendre au plus tard le 13 novembre 2017.
 Le projet compte pour moitié de la note finale du premier semestre d'Introduction à la programation.
 Il consiste en la création d'un algorithme qui permet de retrouver Charlie dans une image.
 Voici les consigne du projet :
+
 Enoncé et mise en place
 Ce projet a pour but de vous faire faire une incursion dans le domaine de la vision par ordinateur. Il sera réalisé par groupes de deux personnes (il est possible de le faire seul si vous le souhaitez).
 
@@ -30,8 +31,9 @@ Remplissez le champ From archive file en sélectionnant l'archive ci-dessus (au 
 Cliquez sur Finish.
 L'énoncé vous indique quel fichier compléter et comment.
 
-Barème :
+Barème
 Il y a quatre étapes à compléter pour la réalisation de ce mini-projet. La grille ci-dessous vous donne la répartition des points par étape.
+
 
 Etape 1 
 Représentation d'images	points : 10	point max sur 6: 1.5
@@ -41,10 +43,6 @@ Etape 3
 Localisation du motif	points : 20	point max sur 6: 4
 Etape 4 
 Corrélations croisées	points : 40	point max sur 6: 6
-
-« Wall of fame » :-)
-
-Si vous avez réussi à trouver Charlie à la plage, vous pouvez envoyer les coordonnées du coin supérieur gauche du motif à l'adresse cs107@epfl.ch. Les 10 premiers groupes nous faisant parvenir ce message verront leurs noms s'afficher sur ce « Wall of fame » ;-)
 
 Important:
 
