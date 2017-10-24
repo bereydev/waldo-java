@@ -9,10 +9,25 @@ public final class ImageProcessing {
      * @see #getBlue
      * @see #getRGB(int, int, int)
      */
-    public static int getRed(int rgb) {
+ 	int [] [] rgbImage = Helper.read("charlie.png");
+ 	
+ 	
 
-    	// TODO implement me !
-    	return -2; 
+    public static int getRed(int rgb) {
+    	
+    	int decal;
+    	decal = rgb >> 16;
+    	int resultat = decal & 0xff;	
+    	
+    	
+    	
+    	if (resultat < 0) { 
+    		return 0;
+    	}else if (resultat > 255){
+    		return 255;
+    	}
+    	
+    	return resultat;
     }
 
     /**
