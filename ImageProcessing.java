@@ -73,7 +73,7 @@ public final class ImageProcessing {
 
     /**
      * Returns packed RGB components from given gray-scale value.
-     * @param gray : an integer 
+     * @param gray : a double 
      * @return a 32-bits RGB color
      * @see #getGray
      */
