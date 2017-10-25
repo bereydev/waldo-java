@@ -121,12 +121,26 @@ public final class ImageProcessing {
      * @see #encode
      * @see #getGray
      */
-    public static double[][] toGray(int[][] image) {
- 
-    	// TODO implement me !
-    	return new double[][]{};
-    }
+   public static double[][] toGray(int[][] image) {
 
+    	double [] [] gray = new double [image.length][image[0].length];
+    
+    for (int row = 0; row < image.length; row++) {
+    for (int column = 0; column < image[row].length; column++) {
+    	
+    	
+    int red = getRed(image[row][column]);
+    int green = getGreen(image[row][column]);
+    int blue = getBlue(image[row][column]);
+    
+    gray [row][column] = (red + blue + green) / 3 ;
+    	++column ;
+		
+	}
+	
+	}
+    	return gray;
+    }
     /**
      * Converts gray-scale image to packed RGB image.
      * @param channels : a HxW double array
