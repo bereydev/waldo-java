@@ -153,13 +153,11 @@ public final class ImageProcessing {
     	int [][] image = new int [gray.length][gray[0].length];
     	for (int row = 0; row < gray.length; row++) {
 			for (int column = 0; column < gray[row].length; column++) {
-				int red = getRed((int)gray [row][column])/3;
-				int green = getGreen((int)gray [row][column])/3;
-				int blue = getBlue((int)gray [row][column])/3;
-				image [row][column] = (red <<16) | (green << 8) | (blue);
+				int color = (int)gray [row][column]/3;
+				image [row][column] = (color <<16) | (color << 8) | (color);
 			}
 		}
-    	return new int[][]{};
+    	return image;
     }
 
     
