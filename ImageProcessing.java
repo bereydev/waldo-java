@@ -9,43 +9,19 @@ public final class ImageProcessing {
      * @see #getBlue
      * @see #getRGB(int, int, int)
      */
- 	int [] [] rgbImage = Helper.read("charlie.png");
- 	
- 	
- 	int[][] image = new int[0][0];
-    double[][] grayImage = new double[0][0];
-
-    int rgb = 0;
-    int red = 0;
-    int green = 0;
-    int blue = 0;
-    double gray = 0;
-    double factor = 0;
-    
-    int intResult;
-    double doubleResult;
-    boolean boolResult;
 
     public static int getRed(int rgb) {
     	
     	int decal;
     	decal = rgb >> 16;
     	int resultat = decal & 0xff;	
-    	
-    	
-    	
     	if (resultat < 0) { 
     		return 0;
     	}else if (resultat > 255){
     		return 255;
     	}
-    	
     	return resultat;
     }
-
-    int resultat1;
-    int resultat2;
-    int resultat3;
     
     /**
      * Returns green component from given packed color.
@@ -99,11 +75,11 @@ public final class ImageProcessing {
      */
     public static double getGray(int rgb) {
     	
-    	int Result = ImageProcessing.getRed(rgb);
-    int Result2 = ImageProcessing.getGreen(rgb);	
-    int Result3 = ImageProcessing.getBlue(rgb);
+    	int red = getRed(rgb);
+    int green = getGreen(rgb);	
+    int blue = getBlue(rgb);
     	
-    double gray = (Result + Result2 + Result3) / 3 ;
+    double gray = (red + green + blue) / 3 ;
         return gray;
     }
 
@@ -119,10 +95,9 @@ public final class ImageProcessing {
      */
     public static int getRGB(int red, int green, int blue) {
     	
-    int 	intResult = ImageProcessing.getRGB(red, green, blue);
-    	
+    int rgb = (red <<16) | (green << 8) | (blue);
 
-    	 return intResult;
+    	 return rgb;
     }
 
     /**
@@ -132,8 +107,11 @@ public final class ImageProcessing {
      * @see #getGray
      */
     public static int getRGB(double gray) {
-    	// TODO implement me !
-    	return -2; 
+    	int red = (int)gray/3;
+    	int green = (int)gray/3;
+    	int blue =(int)gray/3;
+    	int rgb = (red <<16) | (green << 8) | (blue);
+    	return rgb; 
     }
 
     /**
@@ -144,7 +122,7 @@ public final class ImageProcessing {
      * @see #getGray
      */
     public static double[][] toGray(int[][] image) {
-
+ 
     	// TODO implement me !
     	return new double[][]{};
     }
@@ -157,8 +135,16 @@ public final class ImageProcessing {
      * @see #getRGB(double)
      */
     public static int[][] toRGB(double[][] gray) {
-
-    	// TODO implement me !
+    	
+    	int [][] image = new int [gray.length][gray[0].length];
+    	for (int row = 0; row < gray.length; row++) {
+			for (int column = 0; column < gray[row].length; column++) {
+				int red = getRed((int)gray [row][column])/3;
+				int green = getGreen((int)gray [row][column])/3;
+				int blue = getBlue((int)gray [row][column])/3;
+				image [row][column] = (red <<16) | (green << 8) | (blue);
+			}
+		}
     	return new int[][]{};
     }
 
