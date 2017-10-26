@@ -11,9 +11,36 @@ public class Collector {
 	 * @return an array of two integer coordinates, row first and then column
 	 */
 	public static int[] findBest(double[][] matrix, boolean smallestFirst) {
-
-    	// TODO implement me !
-		return new int[]{};
+		
+		smallestFirst = false;
+		double smallest  = Double.POSITIVE_INFINITY;
+		
+		int [] smallesttab = new int [2];
+		
+		
+				
+		
+		for(int row = 0; row <= matrix.length ; ++row ) {
+			for(int col = 0 ; col <= matrix.length ; ++col ) {
+			
+				double number = matrix[row][col] ;
+				
+				if (number < smallest) {
+				smallestFirst = true;	
+				}
+				if( smallestFirst ) {
+					
+					smallesttab [0] = row  ; 
+					smallesttab[1] = col ;
+					
+					
+				}
+				
+			}
+			
+		}
+		return  smallesttab ;
+		
 	}
 
 	
