@@ -20,6 +20,8 @@ public final class Main {
     	testGetRed();
     	testGetGreen();
     	testGetBlue();
+    	testGetGray();
+    testGetRGB();
     	testToGrayToRGB();
     	testGrayscale();
     	testFindNBest();
@@ -65,11 +67,36 @@ public final class Main {
     }
     //A compléter par Julien
     public static void testGetGray() {
+    	int color = 0b11110000_00001111_01010101;
+    	double ref = 340/3;
+    	double gray = ImageProcessing.getGray(color);
+    	
+    	if (gray == ref) {
+    		System.out.println("Test passed");
+    	} else {
+    		System.out.println("Test failed. Returned value = " + gray + " Expected value = " + ref);
+    	}
+    	
     	
     }
-    //A compléter par Julien (ne pas oublier de tester les deux surcharges d'opérateur)
+
     public static void testGetRGB() {
+  
+    	int blue = 0b01010101;
+    	int green = 0b00001111;
+    	int red = 0b11110000;
+    int ref = 0b11110000_00001111_01010101;
+    
+    int rgb = ImageProcessing.getRGB(red , green, blue );
+   
+    if (rgb == ref) {
+    		System.out.println("Test passed");
+    	} else {
+    		System.out.println("Test failed. Returned value = " + rgb + " Expected value = " + ref);
+    	}
     	
+    
+    
     }
     
     public static void testToGrayToRGB() {
