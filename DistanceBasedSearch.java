@@ -9,10 +9,17 @@ public class DistanceBasedSearch {
 	 * @return a double, the value of the error for the RGB pixel pair. (an integer in [0, 255])
 	 */
 	public static double pixelAbsoluteError(int patternPixel, int imagePixel) {
+		
+						double absoluteError = 0;
+						absoluteError += Math.abs(ImageProcessing.getRed(patternPixel) - ImageProcessing.getRed(imagePixel ));	
+						absoluteError += Math.abs(ImageProcessing.getGreen(patternPixel) - ImageProcessing.getGreen(imagePixel ));		
+						absoluteError += Math.abs(ImageProcessing.getBlue(patternPixel) - ImageProcessing.getBlue(imagePixel ));	
+						absoluteError/=3;
+						
+						return absoluteError;			
+		  	}		  	
+		  		  
 
-    	// TODO implement me !
-		return -2;
-	}
 
 	/**
 	 * Computes the mean absolute error loss of a RGB pattern if positioned
@@ -27,9 +34,18 @@ public class DistanceBasedSearch {
 	 * should return -1 if the denominator is -1
 	 */
 	public static double meanAbsoluteError(int row, int col, int[][] pattern, int[][] image) {
+		
+		double meanAbsoluteError = 0;
+		int nbElements = 0;
+		for (int i = 0; i < pattern.length; i++) {
+			for (int j = 0; j < pattern[i].length; j++) {
+				meanAbsoluteError += pixelAbsoluteError(pattern[i][j],image[row+i][col+j]);
+				nbElements += 1;
+			}
+		}
+		meanAbsoluteError /= nbElements;
 
-    	// TODO implement me !
-		return -2; 
+		return meanAbsoluteError; 
 	}
 
 	/**
@@ -41,8 +57,14 @@ public class DistanceBasedSearch {
 	 * placed over this pixel (upper-left corner) 
 	 */
 	public static double[][] distanceMatrix(int[][] pattern, int[][] image) {
-
-    	// TODO implement me !
-		return new double[][]{}; 
+		double [][] distanceMatrix = new double [image.length-pattern.length+1][image[0].length-pattern[0].length+1];
+		for (int row = 0; row < distanceMatrix.length; row++) {
+			for (int col = 0; col < distanceMatrix.length; col++) {
+				distanceMatrix[row][col] = meanAbsoluteError(row,col,pattern,image);
+			}
+		}
+				
+    	// TODO implement me!
+		return distanceMatrix; 
 	}
 }
