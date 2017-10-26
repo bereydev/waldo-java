@@ -20,6 +20,7 @@ public final class Main {
     	testGetRed();
     	testGetGreen();
     	testGetBlue();
+    	testToGrayToRGB();
     	testGrayscale();
     	testFindNBest();
     	testDistanceBasedSearch();
@@ -62,22 +63,22 @@ public final class Main {
     		System.out.println("Test failed. Returned value = " + blue + " Expected value = " + ref);
     	}
     }
-    
+    //A compléter par Julien
     public static void testGetGray() {
     	
     }
-    
+    //A compléter par Julien (ne pas oublier de tester les deux surcharges d'opérateur)
     public static void testGetRGB() {
     	
     }
     
-    public static void testToGray() {
-    	
+    public static void testToGrayToRGB() {
+    	double [][] imageGray = ImageProcessing.toGray(Helper.read("bin/images/charlie_beach.png"));
+    	int[][] imageRGB = ImageProcessing.matrixToRGBImage(imageGray, 0, 255);
+    	Helper.show(imageRGB, "Modified toGray --> toRGB image");
     }
     
-    public static void testToRGB() {
-    	
-    }
+    
 
     
     
