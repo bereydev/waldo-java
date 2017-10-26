@@ -123,22 +123,13 @@ public final class ImageProcessing {
      */
    public static double[][] toGray(int[][] image) {
 
-    	double [] [] gray = new double [image.length][image[0].length];
-    
-    for (int row = 0; row < image.length; row++) {
-    for (int column = 0; column < image[row].length; column++) {
-    	
-    	
-    int red = getRed(image[row][column]);
-    int green = getGreen(image[row][column]);
-    int blue = getBlue(image[row][column]);
-    
-    gray [row][column] = (red + blue + green) / 3 ;
-    	++column ;
-		
-	}
+    	double [][] gray = new double [image.length][image[0].length];
+        for (int row = 0; row < image.length; row++) {
+    		for (int col = 0; col < image[row].length; col++) {    
+    				gray [row][col] = getGray(image[row][col]);
+    			}
 	
-	}
+			}
     	return gray;
     }
     /**
@@ -150,14 +141,14 @@ public final class ImageProcessing {
      */
     public static int[][] toRGB(double[][] gray) {
     	
-    	int [][] image = new int [gray.length][gray[0].length];
+    	int [][] imageRgb = new int [gray.length][gray[0].length];
     	for (int row = 0; row < gray.length; row++) {
-			for (int column = 0; column < gray[row].length; column++) {
-				int color = (int)gray [row][column]/3;
-				image [row][column] = (color <<16) | (color << 8) | (color);
+			for (int col = 0; col < gray[row].length; col++) {
+				
+				imageRgb [row][col] = getRGB(gray [row][col]);
 			}
 		}
-    	return image;
+    	return imageRgb;
     }
 
     
