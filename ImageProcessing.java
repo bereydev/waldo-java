@@ -161,7 +161,15 @@ public final class ImageProcessing {
      * @return an 2D integer array, containing a RGB mapping of the matrix 
      */
     public static int[][] matrixToRGBImage(double[][] matrix, double min, double max) {
-    	// TODO implement me !
-    	return new int[][]{};
+    	
+    	for (int row = 0; row < matrix.length; row++) {
+			for (int col = 0; col < matrix[0].length; col++) {
+				matrix[row][col] = (matrix[row][col]-min)/(max-min)*255;
+			}
+			
+		}
+    	int[][] imageRgb = toRGB(matrix);
+    	
+    	return imageRgb;
     }
 }
