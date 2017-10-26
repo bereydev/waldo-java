@@ -64,7 +64,7 @@ public class DistanceBasedSearch {
 			}
 		}
 				
-    	// TODO implement me!
+    	
 		return distanceMatrix; 
 	}
 }
