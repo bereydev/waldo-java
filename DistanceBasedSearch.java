@@ -9,10 +9,34 @@ public class DistanceBasedSearch {
 	 * @return a double, the value of the error for the RGB pixel pair. (an integer in [0, 255])
 	 */
 	public static double pixelAbsoluteError(int patternPixel, int imagePixel) {
+		
+		for ( int row = 0; row <= image.length; row++) {
+			for (int col = 0; col < image.length; col++) {
+				
+				
+				patternPixel = ImageProcessing.toRGB([row][col]);
+				imagePixel = ImageProcessing.toRGB([row][col]);
+				
+				double absoluteError ;
+				double EAM;
+				
+				do {
+					
+					absoluteError = Math.abs((patternPixel [row][col]) - imagePixel[row][col] ) / (Math.abs(toRGB [row][col]));
+					
+					EAM += absoluteError ;
+				
+				}while (row <= row.length && column <= col.length);
+			
+				EAM /= row * col ;
+			
+			}
+			
+		}
 
-    	// TODO implement me !
-		return -2;
+		return EAM;
 	}
+
 
 	/**
 	 * Computes the mean absolute error loss of a RGB pattern if positioned
