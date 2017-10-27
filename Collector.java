@@ -93,8 +93,8 @@ public static int[] findBest(double[][] matrix, boolean smallestFirst) {
 				}
 			}	
 		}
-		return nBestPosition;
 		}
+		return nBestPosition;
 	}
 	
 	
