@@ -56,9 +56,45 @@ public static int[] findBest(double[][] matrix, boolean smallestFirst) {
 	 * @return an array of size n containing row, column-coordinate pairs
 	 */
 	public static int[][] findNBest(int n, double[][] matrix, boolean smallestFirst) {
-
-    	// TODO implement me !
-		return new int[][]{};
+		
+		double smallest  = Double.POSITIVE_INFINITY;
+		double biggest  = Double.NEGATIVE_INFINITY;
+		int [][] nBestPosition = new int [n][2];
+		
+		for (int i = 0; i < n; i++) {
+			
+		
+		if (smallestFirst) {
+			for(int row = 0; row < matrix.length ; row++ ) {
+				for(int col = 0 ; col < matrix[row].length ; col++ ) {
+				
+					double numberToCompare = matrix[row][col] ;				
+					if (numberToCompare < smallest) {
+					nBestPosition[i][0]= row ;
+					nBestPosition[i][1]= col ;
+					smallest = matrix[row][col];
+					matrix[row][col] = Double.POSITIVE_INFINITY;
+					
+					}
+				}
+			}	
+		}else {
+			for(int row = 0; row < matrix.length ; row++ ) {
+				for(int col = 0 ; col < matrix[row].length ; col++ ) {
+				
+					double numberToCompare = matrix[row][col] ;				
+					if (numberToCompare > biggest) {
+						nBestPosition[i][0]= row ;
+					    nBestPosition[i][1]= col ;
+						biggest = matrix[row][col];
+						matrix [row][col] = Double.NEGATIVE_INFINITY;
+					}
+					
+				}
+			}	
+		}
+		return nBestPosition;
+		}
 	}
 	
 	
