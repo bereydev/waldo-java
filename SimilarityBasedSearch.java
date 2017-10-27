@@ -31,21 +31,36 @@ public class SimilarityBasedSearch {
 		double sommeYPattern = 0;
 		double sommeXImage = 0;
 		double sommeYImage = 0 ;
-		for (int row = 0; row < pattern.length; row++) {
-			for (int col = 0; col < patterm[row].length; col++) {
+		double moyenneXImage ;
+		double moyenneYImage ;
+		double moyenneXPattern ;
+		double moyenneYPattern ;
+		double coeffImage;
+		double coeffPattern;
 				
+		for ( row = 0; row < pattern.length; row++) {
+			for ( col = 0; col < pattern[row].length; col++) {
+				
+				int x = row;
+				int y = col;
 				
 				sommeXPattern += x;
-				double moyenneX = ((1 / [row]) * sommexPattern);
+				moyenneXPattern = ((1 / row) * sommeXPattern);
 				
 				sommeYPattern += y;
-				double moyenneY = ((1 / [row]) * sommeYPattern);
+				moyenneYPattern = ((1 / row) * sommeYPattern);
 				
 				sommeXImage += x;
-				double moyennex = ((1 / [row]) * sommeXImage);
+		        moyenneXImage = ((1 / row) * sommeXImage);
 				
 				sommeYImage += y;
-				double moyenneY = ((1 / [row]) * sommeYImage);
+				moyenneYImage = ((1 / row) * sommeYImage);
+				
+				coeffPattern = ((row - moyenneXPattern ) * (col - moyenneYPattern)) / (Math.sqrt(Math.pow(row - moyenneXPattern , 2)) * (Math.pow(col - moyenneYPattern  , 2)));
+				coeffImage = ((row - moyenneXImage ) * (col - moyenneYImage)) / (Math.sqrt(Math.pow(row - moyenneXImage, 2)) * (Math.pow(col - moyenneYImage , 2 )));
+				
+				
+				
 				
 			}
 			
