@@ -27,7 +27,29 @@ public class SimilarityBasedSearch {
 	 */
 	public static double normalizedCrossCorrelation(int row, int col, double[][] pattern, double[][] image) {
 		
-		// TODO implement me !
+		double sommeXPattern = 0;
+		double sommeYPattern = 0;
+		double sommeXImage = 0;
+		double sommeYImage = 0 ;
+		for (int row = 0; row < pattern.length; row++) {
+			for (int col = 0; col < patterm[row].length; col++) {
+				
+				
+				sommeXPattern += x;
+				double moyenneX = ((1 / [row]) * sommexPattern);
+				
+				sommeYPattern += y;
+				double moyenneY = ((1 / [row]) * sommeYPattern);
+				
+				sommeXImage += x;
+				double moyennex = ((1 / [row]) * sommeXImage);
+				
+				sommeYImage += y;
+				double moyenneY = ((1 / [row]) * sommeYImage);
+				
+			}
+			
+		}
 		return -2; 
 	}
 
