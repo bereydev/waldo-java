@@ -10,11 +10,42 @@ public class Collector {
 	 * @param smallestFirst : a boolean, indicates if the smallest element is the best or not (biggest is then the best)
 	 * @return an array of two integer coordinates, row first and then column
 	 */
-	public static int[] findBest(double[][] matrix, boolean smallestFirst) {
-
-    	// TODO implement me !
-		return new int[]{};
+public static int[] findBest(double[][] matrix, boolean smallestFirst) {
+	
+		double smallest  = Double.POSITIVE_INFINITY;
+		double biggest  = Double.NEGATIVE_INFINITY;
+		int [] bestPosition = new int [2];
+		
+		if (smallestFirst) {
+			for(int row = 0; row < matrix.length ; row++ ) {
+				for(int col = 0 ; col < matrix[row].length ; col++ ) {
+				
+					double numberToCompare = matrix[row][col] ;				
+					if (numberToCompare < smallest) {
+						bestPosition [0] = row  ; 
+						bestPosition[1] = col ;
+						smallest = matrix[row][col];
+					}
+				}
+			}	
+		}else {
+			for(int row = 0; row < matrix.length ; row++ ) {
+				for(int col = 0 ; col < matrix[row].length ; col++ ) {
+				
+					double numberToCompare = matrix[row][col] ;				
+					if (numberToCompare > biggest) {
+						bestPosition [0] = row  ; 
+						bestPosition[1] = col ;
+						biggest = matrix[row][col];
+					}
+					
+				}
+			}	
+		}
+		return  bestPosition ;
+		
 	}
+
 
 	
 	/**
