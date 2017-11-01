@@ -27,45 +27,33 @@ public class SimilarityBasedSearch {
 	 */
 	public static double normalizedCrossCorrelation(int row, int col, double[][] pattern, double[][] image) {
 		
-		double sommeXPattern = 0;
-		double sommeYPattern = 0;
-		double sommeXImage = 0;
-		double sommeYImage = 0 ;
-		double moyenneXImage ;
-		double moyenneYImage ;
-		double moyenneXPattern ;
-		double moyenneYPattern ;
-		double coeffImage;
-		double coeffPattern;
+		double sommePattern = 0;
+		double sommeImage = 0;
+		double moyenneImage ;
+		double moyennePattern ;
+		double crossCorrelation = 0 ;
+		
 				
-		for ( row = 0; row < pattern.length; row++) {
-			for ( col = 0; col < pattern[row].length; col++) {
+		for(int i = 0 ; i < pattern.length ; i++) {
+			for(int j = 0 ; j < pattern[i].length; j++) {
 				
-				int x = row;
-				int y = col;
-				
-				sommeXPattern += x;
-				moyenneXPattern = ((1 / row) * sommeXPattern);
-				
-				sommeYPattern += y;
-				moyenneYPattern = ((1 / row) * sommeYPattern);
-				
-				sommeXImage += x;
-		        moyenneXImage = ((1 / row) * sommeXImage);
-				
-				sommeYImage += y;
-				moyenneYImage = ((1 / row) * sommeYImage);
-				
-				coeffPattern = ((row - moyenneXPattern ) * (col - moyenneYPattern)) / (Math.sqrt(Math.pow(row - moyenneXPattern , 2)) * (Math.pow(col - moyenneYPattern  , 2)));
-				coeffImage = ((row - moyenneXImage ) * (col - moyenneYImage)) / (Math.sqrt(Math.pow(row - moyenneXImage, 2)) * (Math.pow(col - moyenneYImage , 2 )));
+				sommePattern += pattern[i][j] ;
+				sommeImage += image[i][j] ;
+			
+			}
+		}
+			moyennePattern = (sommePattern / (pattern.length * pattern[0].length));
+			moyenneImage = (sommeImage / (image.length * image[0].length)) ;
+			
+		for (int i = 0; i < pattern.length; i++) {
+			for (int j = 0; j < pattern[i].length; j++) {
 				
 				
-				
+				crossCorrelation += ( image[row + i][col + j] - moyennePattern ) * (pattern[i][j] - moyennePattern) / ((Math.sqrt(Math.pow(image[row + i][col + j] - moyenneImage , 2)) * (Math.pow(pattern[i][j] - moyennePattern , 2))));	
 				
 			}
-			
 		}
-		return -2; 
+		return crossCorrelation ;		
 	}
 
 	
