@@ -8,45 +8,51 @@ public class Collector {
 	 * Find the row, column coordinates of the best element (biggest or smallest)
 	 * for the given matrix
 	 * 
-	 * @param matrix
-	 *            : an 2D array of doubles
-	 * @param smallestFirst
-	 *            : a boolean, indicates if the smallest element is the best or not
-	 *            (biggest is then the best)
+	 * @param matrix: an 2D array of doubles
+	 * Requirement: matrix has to be an array greater than 1 by 1
+	 * @param smallestFirst: a boolean, indicates if the smallest element is the best or not (biggest is then the best).
+	 * Requirement: none, true or false would work
 	 * @return an array of two integer coordinates, row first and then column
 	 */
 	public static int[] findBest(double[][] matrix, boolean smallestFirst) {
-
-		double smallest = Double.POSITIVE_INFINITY;
-		double biggest = Double.NEGATIVE_INFINITY;
+		
+		assert matrix.length > 0 && matrix[0].length > 0;
+		
+		double reference;
 		int[] bestPosition = new int[2];
-
+		
 		if (smallestFirst) {
+			reference = Double.POSITIVE_INFINITY;
 			for (int row = 0; row < matrix.length; row++) {
-				for (int col = 0; col < matrix[row].length; col++) {
+				for (int col = 0; col < matrix[0].length; col++) {
 
 					double numberToCompare = matrix[row][col];
-					if (numberToCompare < smallest) {
+					if (numberToCompare < reference) {
 						bestPosition[0] = row;
 						bestPosition[1] = col;
-						smallest = matrix[row][col];
+						reference = matrix[row][col];
 					}
 				}
 			}
+			
 		} else {
+			reference = Double.NEGATIVE_INFINITY;
 			for (int row = 0; row < matrix.length; row++) {
-				for (int col = 0; col < matrix[row].length; col++) {
+				for (int col = 0; col < matrix[0].length; col++) {
 
 					double numberToCompare = matrix[row][col];
-					if (numberToCompare > biggest) {
+					if (numberToCompare > reference) {
 						bestPosition[0] = row;
 						bestPosition[1] = col;
-						biggest = matrix[row][col];
+						reference = matrix[row][col];
 					}
-
 				}
 			}
 		}
+
+		
+		
+		
 		return bestPosition;
 
 	}
@@ -55,32 +61,32 @@ public class Collector {
 	 * Find the row, column coordinate-pairs of the n best (biggest or smallest)
 	 * elements of the given matrix
 	 * 
-	 * @param n
-	 *            : an integer, the number of best elements we want to find
-	 * @param matrix
-	 *            : an 2D array of doubles
-	 * @param smallestFirst
-	 *            : a boolean, indicates if the smallest element is the best or not
-	 *            (biggest is the best)
+	 * @param n: an integer, the number of best elements we want to find
+	 * Requirement: n has to be greater than 0
+	 * @param matrix: an 2D array of doubles
+	 * Requirement: matrix has to be an array greater than 1 by 1
+	 * @param smallestFirst: a boolean, indicates if the smallest element is the best or not (biggest is the best).
+	 * Requirement: none, true or false would work
 	 * @return an array of size n containing row, column-coordinate pairs
 	 */
 	public static int[][] findNBest(int n, double[][] matrix, boolean smallestFirst) {
+		
+		assert n>0;
+		assert matrix.length > 0 && matrix[0].length > 0;
+		
+		double[][] copyOfMatrix = ImageProcessing.copyMatrix(matrix);
 
-		int[][] nBestPosition = new int[n][2];
-		double[] temp = new double[n];
+		int[][] nBestPosition = new int[n][];
 
 		for (int row = 0; row < n; row++) {
-			nBestPosition[row] = findBest(matrix, smallestFirst);
-			temp[row] = matrix[nBestPosition[row][0]][nBestPosition[row][1]];
+			nBestPosition[row] = findBest(copyOfMatrix, smallestFirst);
+			
 			if (smallestFirst) {
-				matrix[nBestPosition[row][0]][nBestPosition[row][1]] = Double.POSITIVE_INFINITY;
+				copyOfMatrix[nBestPosition[row][0]][nBestPosition[row][1]] = Double.POSITIVE_INFINITY;
 			} else {
-				matrix[nBestPosition[row][0]][nBestPosition[row][1]] = Double.NEGATIVE_INFINITY;
+				copyOfMatrix[nBestPosition[row][0]][nBestPosition[row][1]] = Double.NEGATIVE_INFINITY;
 			}
 
-		}
-		for (int row = 0; row < nBestPosition.length; row++) {
-			matrix[nBestPosition[row][0]][nBestPosition[row][1]] = temp[row];
 		}
 		return nBestPosition;
 	}
