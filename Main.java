@@ -68,7 +68,7 @@ public final class Main {
 
 	public static void testGetGray() {
 		int color = 0b11110000_00001111_01010101;
-		double ref = 340 / 3;
+		double ref = 340 / 3.0;
 		double gray = ImageProcessing.getGray(color);
 
 		if (gray == ref) {
@@ -98,7 +98,7 @@ public final class Main {
 
 	public static void testToGrayToRGBMatrix() {
 		double[][] imageGray = ImageProcessing.toGray(Helper.read("images/charlie_beach.png"));
-		int[][] imageRGB = ImageProcessing.matrixToRGBImage(imageGray, 0, 255);
+		int[][] imageRGB = ImageProcessing.matrixToRGBImage(imageGray, 0,255 );
 		Helper.show(imageRGB, "Modified toGray --> toRGB image");
 	}
 
