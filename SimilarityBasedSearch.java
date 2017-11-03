@@ -37,9 +37,9 @@ public class SimilarityBasedSearch {
 	 * @param column: a integer, the column-coordinate of the upper left corner of the pattern in the image.
 	 * Requirement: column must be greater than or equal to 0 and smaller than the difference of the column number of the image +1 and the column number of the pattern
 	 * @param pattern: an 2D array of doubles, the gray-scale pattern to find
-	 * Requirement: pattern has to be an array greater than 1 by 1
+	 * Requirement: pattern has to be an 2D  array with a minimal size of 1*1
 	 * @param image: an 2D array of double, the gray-scale image where to look for the pattern
-	 * Requirement: image has to be an array greater than 1 by 1
+	 * Requirement: image has to be an 2D  array with a minimal size of 1*1
 	 * @return a double, the Normalized Cross Correlation value at position (row, col) between the pattern and the part of the base image that is 
 	 * 		   covered by the pattern, if the pattern is shifted by x and y. should
 	 *         return -1 if the denominator is 0
@@ -111,6 +111,9 @@ public class SimilarityBasedSearch {
 	 *         gray-scale image, the similarity (normalized cross-correlation)
 	 *         between the image's window and the pattern placed over this pixel
 	 *         (upper-left corner)
+	 
+	 requirement : image has to be an 2D  array with a minimal size of 1*1
+	 requirement : pattern has to be an 2D  array with a minimal size of 1*1
 	 */
 	public static double[][] similarityMatrix(double[][] pattern, double[][] image) {
 
