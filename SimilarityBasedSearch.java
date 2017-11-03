@@ -72,6 +72,16 @@ public class SimilarityBasedSearch {
 	return crossCorrelation;
 	}
 
+	/**
+	 * @param row: a integer, the row-coordinate of the upper left corner of the pattern in the image.
+	 * Requirement: row must be greater than or equals to 0 and smaller than the difference of the row number of the image +1 and the row number of the pattern 
+	 * @param column: a integer, the column-coordinate of the upper left corner of the pattern in the image.
+	 * Requirement: column must be greater than or equal to 0 and smaller than the difference of the column number of the image +1 and the column number of the pattern
+         * @param matrix : an 2D array
+	 * Requirement : a 2D array of double with a minimal size of 1*1
+	 */
+	
+	
 	public static double windowMean(double [][] matrix , int row , int col , int width , int height) {
 		double windowMean = 0;
 		for (int i = row; i < row + width; i++) {
