@@ -82,7 +82,7 @@ public final class ImageProcessing {
 		int green = getGreen(rgb);
 		int blue = getBlue(rgb);
 
-		double gray = (red + green + blue) / 3;
+		double gray = (red + green + blue) / 3.0;
 		return gray;
 	}
 
@@ -133,9 +133,9 @@ public final class ImageProcessing {
 		} else if (gray > 255) {
 			gray = 255;
 		}
-		int red = (int) gray / 3;
-		int green = (int) gray / 3;
-		int blue = (int) gray / 3;
+		int red = (int) gray;
+		int green = (int) gray;
+		int blue = (int) gray;
 		int rgb = (red << 16) | (green << 8) | (blue);
 		return rgb;
 	}
@@ -154,7 +154,7 @@ public final class ImageProcessing {
 
 		double[][] gray = new double[image.length][image[0].length];
 		for (int row = 0; row < image.length; row++) {
-			for (int col = 0; col < image[row].length; col++) {
+			for (int col = 0; col < image[0].length; col++) {
 				gray[row][col] = getGray(image[row][col]);
 			}
 
@@ -176,7 +176,7 @@ public final class ImageProcessing {
 		
 		int[][] imageRgb = new int[gray.length][gray[0].length];
 		for (int row = 0; row < gray.length; row++) {
-			for (int col = 0; col < gray[row].length; col++) {
+			for (int col = 0; col < gray[0].length; col++) {
 
 				imageRgb[row][col] = getRGB(gray[row][col]);
 			}
@@ -197,14 +197,28 @@ public final class ImageProcessing {
 		
 		assert matrix.length > 0 && matrix[0].length > 0;
 		
+		double[][] copyOfMatrix = copyMatrix(matrix);
+		
 		for (int row = 0; row < matrix.length; row++) {
 			for (int col = 0; col < matrix[0].length; col++) {
-				matrix[row][col] = (matrix[row][col] - min) / (max - min) * 255;
+				copyOfMatrix[row][col] = (matrix[row][col] - min) / (max - min) * 255;
 			}
 
 		}
-		int[][] imageRgb = toRGB(matrix);
+		int[][] imageRgb = toRGB(copyOfMatrix);
 
 		return imageRgb;
+	}
+	
+	public static double[][] copyMatrix(double[][] matrix){
+		
+		double[][] copyMatrix = new double [matrix.length][matrix[0].length];
+		
+		for (int row = 0; row < copyMatrix.length; row++) {
+			for (int col = 0; col < copyMatrix[0].length; col++) {
+				copyMatrix[row][col] = matrix[row][col];
+			}
+		}
+		return copyMatrix;
 	}
 }
