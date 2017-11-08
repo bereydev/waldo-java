@@ -209,7 +209,11 @@ public final class ImageProcessing {
 
 		return imageRgb;
 	}
-	
+	/**
+	 * Copy the 2D array matrix in an other 2D array of the same size called copyMatrix	  
+	 * @param matrix : the arbitrary 2D double array to convert into integer
+	 * @return an 2D double array
+	 */
 	public static double[][] copyMatrix(double[][] matrix){
 		
 		double[][] copyMatrix = new double [matrix.length][matrix[0].length];
