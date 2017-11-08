@@ -67,7 +67,8 @@ public class DistanceBasedSearch {
 	 * Requirement: image has to be an array greater than 1 by 1
 	 * @return a 2D array of doubles, containing for each pixel of a original RGB
 	 *         image, the distance (meanAbsoluteError) between the image's window
-	 *         and the pattern placed over this pixel (upper-left corner)
+	 *         and the pattern placed over this pixel (upper-left corner). This matrix has the size of 
+	 *         the image minus the size of the pattern.
 	 */
 	public static double[][] distanceMatrix(int[][] pattern, int[][] image) {
 		
@@ -82,6 +83,43 @@ public class DistanceBasedSearch {
 		}
 		return distanceMatrix;
 	}
-	
+	/**
+	 * Compute the distanceMatrix between a RGB image and a RGB pattern
+	 * 
+	 * @param pattern: an 2D array of integers, the RGB pattern to find
+	 * Requirement: pattern has to be an array greater than 1 by 1
+	 * @param image: an 2D array of integers, the RGB image where to look for the pattern
+	 * Requirement: image has to be an array greater than 1 by 1
+	 * @return a 2D array of doubles, containing for each pixel of a original RGB
+	 *         image, the distance (meanAbsoluteError) between the image's window
+	 *         and the pattern placed over this pixel (upper-left corner). This array
+	 *         has the size of the image.
+	 *   
+	 */
+	public static double [][] distanceMatrix(int[][] pattern, int[][] image, String strategy) {
+		assert pattern.length > 0 && pattern[0].length > 0;
+		assert image.length > 0 && image[0].length > 0;
+		assert strategy == "wrap" || strategy == "mirror" ;
+		
+			double[][] distanceMatrix = new double[image.length ][image[0].length];
+			for (int row = 0; row < distanceMatrix.length; row++) {
+				for (int col = 0; col < distanceMatrix[0].length; col++) {
+					
+					if (row > (image.length - pattern.length + 1 ) || col > (image[0].length - pattern[0].length + 1) ) {
+						if (strategy == "wrap") {
+						row = row %  image.length ;
+						col = col % image[0].length ;
+					}else if (strategy == "mirror") {
+						row = image.length - 2 - (row % image.length) ;
+					    col = image[0].length - 2 - (col % image[0].length) ;
+					}
+					}
+					
+					distanceMatrix[row][col] = meanAbsoluteError(row, col, pattern, image);
+					
+					
+		}
+		}
+			return  distanceMatrix ;	
+	}
 }
-
