@@ -183,5 +183,5 @@ public final class Main {
 		Helper.show(beach, "Found again!");
 	}
 
-	// TODO: complete
+	
 }
