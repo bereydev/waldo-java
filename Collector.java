@@ -103,14 +103,7 @@ public class Collector {
 	 */
 	public static ArrayList<int[]> quicksortPixelCoordinates(double[][] matrix) {
 
-			int Arraylist [][] = new int [matrix.length * matrix[0].length][1];
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix.length; j++) {
-				
-			}
-		}
-		ArrayList [i][0] = matrix [i];
-		ArrayList[i][1]= matrix [j];
+	
 		return new ArrayList<int[]>();
 	}
 
@@ -132,24 +125,7 @@ public class Collector {
 	 */
 	public static int[][] findNBestQuickSort(int n, double[][] matrix, boolean smallestFirst) {
 
-		assert matrix.length > 0;
-		
-		if (matrix.length = 0) {
-			
-			return int[0][0];
-		}
-		int quicksort [] [] = new int [matrix [row * length][2];
-		
-		for (int row = 0; row < matrix.length; row++) {
-			for (int col = 0; col < matrix.length; col++) {
-				
-				if(smallestFirst) {
-						quicksort[row][0] = row;
-						quicksort[]
-				}
-				if (smallestFirst = false ) {
-						
-				}
+	
 		return new int[][] {};
 	}
 }
