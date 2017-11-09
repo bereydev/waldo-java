@@ -83,13 +83,14 @@ public class DistanceBasedSearch {
 		}
 		return distanceMatrix;
 	}
-	/**
+	/**BONUS 7.1
 	 * Compute the distanceMatrix between a RGB image and a RGB pattern
 	 * 
 	 * @param pattern: an 2D array of integers, the RGB pattern to find
 	 * Requirement: pattern has to be an array greater than 1 by 1
 	 * @param image: an 2D array of integers, the RGB image where to look for the pattern
 	 * Requirement: image has to be an array greater than 1 by 1
+	 * @param strategy: a string that determines if we apply the wrapping strategy or the mirroring strategy. Requirement: strategy has to be equal to "wrap" or "mirror"
 	 * @return a 2D array of doubles, containing for each pixel of a original RGB
 	 *         image, the distance (meanAbsoluteError) between the image's window
 	 *         and the pattern placed over this pixel (upper-left corner). This array
@@ -97,6 +98,7 @@ public class DistanceBasedSearch {
 	 *   
 	 */
 	public static double [][] distanceMatrix(int[][] pattern, int[][] image, String strategy) {
+		
 		assert pattern.length > 0 && pattern[0].length > 0;
 		assert image.length > 0 && image[0].length > 0;
 		assert strategy == "wrap" || strategy == "mirror" ;
