@@ -26,6 +26,7 @@ public final class Main {
 		testGrayscale();
 		testFindNBest();
 		testDistanceBasedSearch();
+		testDistanceBasedSearchCanon();
 		testSimilarityBasedSearch();
 		findCharlie();
 	}
@@ -124,7 +125,7 @@ public final class Main {
 		}
 	}
 
-	// TODO: complete
+	// TODO: complete with Bonus
 
 	/*
 	 * Tests for Class DistanceBasedSearch
@@ -139,8 +140,31 @@ public final class Main {
 		Helper.drawBox(p[0], p[1], onions[0].length, onions.length, food);
 		Helper.show(food, "Found!");
 	}
-
-	// TODO: complete
+	
+	public static void testDistanceBasedSearchCanon() {
+		System.out.println("Test DistanceBasedSearchCanon");
+		int[][] circuit = Helper.read("images/image.png");
+		int[][] circuitLight = Helper.read("images/image-light.png");
+		int[][] circuitDark = Helper.read("images/image-dark.png");
+		int[][] canon = Helper.read("images/pattern.png");
+		double[][] distance = DistanceBasedSearch.distanceMatrix(canon, circuit);
+		double[][] distanceLight = DistanceBasedSearch.distanceMatrix(canon, circuitLight);
+		double[][] distanceDark = DistanceBasedSearch.distanceMatrix(canon, circuitDark);
+		
+		int[] p = Collector.findBest(distance, true);
+		Helper.drawBox(p[0], p[1], canon[0].length, canon.length, circuit);
+		Helper.show(circuit, "Found the pattern!");
+		
+		int[] q = Collector.findBest(distanceLight, true);
+		Helper.drawBox(q[0], q[1], canon[0].length, canon.length, circuitLight);
+		Helper.show(circuitLight, "Not found ! Proof of the limit of the Distance Based Search!");
+		
+		int[] r = Collector.findBest(distanceDark, true);
+		Helper.drawBox(r[0], r[1], canon[0].length, canon.length, circuitDark);
+		Helper.show(circuitDark, "Not found ! Proof of the limit of the Distance Based Search!");
+	}
+	
+	
 
 	/*
 	 * Tests for Class SimilarityBasedSearch
