@@ -7,7 +7,7 @@ public class SimilarityBasedSearch {
 	 * 
 	 * @param image: a 2D double array, the gray-scale Image
 	 * Requirement: image has to be an array greater than 1 by 1
-	 * @return a double value between 0 and 255 which is the mean value
+	 * @return a double value 
 	 */
 	public static double mean(double[][] image) {
 		
@@ -66,6 +66,9 @@ public class SimilarityBasedSearch {
 				sumPatternSquared += Math.pow((pattern[i][j]-moyennePattern), 2);
 			}
 		}
+		if (sumImageSquared*sumPatternSquared == 0) {
+			return -1;
+		}
 		
 		crossCorrelation = sumPatternImage/Math.sqrt(sumImageSquared*sumPatternSquared);
 		
@@ -83,9 +86,9 @@ public class SimilarityBasedSearch {
      * @param matrix : an 2D array
 	 * Requirement : a 2D array of double with a minimal size of 1*1.
 	 * @param widht : the number of column concern in the matrix.
-	 * Requirement : width has to be greater than 0.
+	 * Requirement : width has to be greater than or equal to 0.
 	 * @param height : the number of row concern in the matrix.
-	 * Requirement : height has to be greater than 0.
+	 * Requirement : height has to be greater than or equal to 0.
 	 * @return a double, which is the mean value of all elements of the portion of the matrix
 	 */
 	
@@ -93,7 +96,8 @@ public class SimilarityBasedSearch {
 	public static double windowMean(double [][] matrix , int row , int col , int width , int height) {
 		
 		assert matrix.length>0 && matrix[0].length>0;
-		assert width >0 && width < matrix.length;
+		assert width >0 && width <= matrix.length;
+		assert height >0 && height <= matrix[0].length;
 		assert row >= 0 && row <= (matrix.length-width+1);
 		assert col >= 0 && col <= (matrix[0].length-height+1);
 		
