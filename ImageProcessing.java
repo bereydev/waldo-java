@@ -143,7 +143,7 @@ public final class ImageProcessing {
 	/**
 	 * Converts packed RGB image to gray-scale image.
 	 * 
-	 * @param image: a HxW integer array. Requirement: image has to be an array greater than 1 by 1  
+	 * @param image: a HxW integer array. Requirement: image has to be an array of greater than 1 by 1  
 	 * @return a HxW double array
 	 * @see #encode
 	 * @see #getGray
@@ -211,10 +211,12 @@ public final class ImageProcessing {
 	}
 	/**
 	 * Copy the 2D array matrix in an other 2D array of the same size called copyMatrix	  
-	 * @param matrix : the arbitrary 2D double array to convert into integer
-	 * @return an 2D double array
+	 * @param matrix : the arbitrary 2D double array to copy in a double array. Requirement: matrix has to be an array greater than 1 by 1
+	 * @return a 2D double array
 	 */
 	public static double[][] copyMatrix(double[][] matrix){
+		
+		assert matrix.length > 0 && matrix[0].length > 0;
 		
 		double[][] copyMatrix = new double [matrix.length][matrix[0].length];
 		
