@@ -55,65 +55,60 @@ public class SimilarityBasedSearch {
 		double moyenneImage = windowMean(image,row,col,pattern.length,pattern[0].length);
 		double moyennePattern = mean(pattern);
 		double crossCorrelation;
-		double correlationPatternImage = 0;
-		double correlationPatternSquared = 0;
-		double correlationImageSquared = 0;
+		double sumPatternImage = 0;
+		double sumPatternSquared = 0;
+		double sumImageSquared = 0;
 		
 		for (int i = 0; i < pattern.length; i++) {
 			for (int j = 0; j < pattern[0].length; j++) {
-				correlationPatternImage += (image[row+i][col+j]-moyenneImage)*(pattern[i][j]-moyennePattern);
-				correlationImageSquared += Math.pow((image[row+i][col+j]-moyenneImage), 2);
-				correlationPatternSquared += Math.pow((pattern[i][j]-moyennePattern), 2);
+				sumPatternImage += (image[row+i][col+j]-moyenneImage)*(pattern[i][j]-moyennePattern);
+				sumImageSquared += Math.pow((image[row+i][col+j]-moyenneImage), 2);
+				sumPatternSquared += Math.pow((pattern[i][j]-moyennePattern), 2);
 			}
 		}
 		
-		crossCorrelation = correlationPatternImage/Math.sqrt(correlationImageSquared*correlationPatternSquared);
+		crossCorrelation = sumPatternImage/Math.sqrt(sumImageSquared*sumPatternSquared);
 		
 	return crossCorrelation;
 	}
 
 	/**
+	 * Computes the mean value of a gray-scale portion of an image beginning from 
+	 * a given row-column coordinate 
+	 * 
 	 * @param row: a integer, the row-coordinate of the upper left corner of the pattern in the image.
-	 * Requirement: row must be greater than or equals to 0 and smaller than the difference of the row number of the image +1 and the row number of the pattern 
+	 * Requirement: row must be greater than or equals to 0 and smaller than the difference of the row number of the matrix +1 and height 
 	 * @param column: a integer, the column-coordinate of the upper left corner of the pattern in the image.
-	 * Requirement: column must be greater than or equal to 0 and smaller than the difference of the column number of the image +1 and the column number of the pattern
+	 * Requirement: column must be greater than or equal to 0 and smaller than the difference of the column number of the matrix +1 and width
      * @param matrix : an 2D array
 	 * Requirement : a 2D array of double with a minimal size of 1*1.
-	 * @param widht : the number of lines of the matrix.
-	 * Requirement : width has to be greater or equal to 1.
-	 * @param height : the number of lines of the matrix.
-	 * Requirement : height has to be greater or equal to 1.
-	 * Return windowMean : a double which is the sum of all elements in the 2D array matrix 
+	 * @param widht : the number of column concern in the matrix.
+	 * Requirement : width has to be greater than 0.
+	 * @param height : the number of row concern in the matrix.
+	 * Requirement : height has to be greater than 0.
+	 * @return a double, which is the mean value of all elements of the portion of the matrix
 	 */
 	
 	
 	public static double windowMean(double [][] matrix , int row , int col , int width , int height) {
-		double windowMean = 0;
+		
+		assert matrix.length>0 && matrix[0].length>0;
+		assert width >0 && width < matrix.length;
+		assert row >= 0 && row <= (matrix.length-width+1);
+		assert col >= 0 && col <= (matrix[0].length-height+1);
+		
+		double mean;
+		double sum = 0;
+		
 		for (int i = row; i < row + width; i++) {
 			for (int j = col; j < col + height; j++) {
-				windowMean += matrix[i][j];
+				sum += matrix[i][j];
 			}
 			
 		}
-		return windowMean;
-	}
-	/**
-	 * @param image : an 2D array of double which will be used to do the sum of its element
-	 * Requirement: image has to be an 2D  array with a minimal size of 1*1
-	 * @param mean : a double 
-	 * return sumValues : the sum of all values which are  contained in the array image
-	 */
-	public static double sumValues(double[][] image, double mean) {
+		mean = sum / (height*width);
 		
-		double sumValues = 0;
-
-		for (int row = 0; row < image.length; row++) {
-			for (int col = 0; col < image[0].length; col++) {
-				sumValues += image[row][col]-mean;
-			}
-		}
-		
-		return sumValues;
+		return mean;
 	}
 	
 		
@@ -122,18 +117,18 @@ public class SimilarityBasedSearch {
 	 * Compute the similarityMatrix between a gray-scale image and a gray-scale
 	 * pattern
 	 * 
-	 * @param pattern
-	 *            : an 2D array of doubles, the gray-scale pattern to find
-	 * @param image
-	 *            : an 2D array of doubles, the gray-scale image where to look for
-	 *            the pattern
+	 * @param pattern: an 2D array of doubles, the gray-scale pattern to find
+	 * @param image: an 2D array of doubles, the gray-scale image where to look for
+	 *            the pattern. 
+	 *            Requirement : image has to be an 2D  array with a minimal size of 1*1
 	 * @return a 2D array of doubles, containing for each pixel of a original
 	 *         gray-scale image, the similarity (normalized cross-correlation)
 	 *         between the image's window and the pattern placed over this pixel
 	 *         (upper-left corner)
+	 *         Requirement : pattern has to be an 2D  array with a minimal size of 1*1
 	 
-	 requirement : image has to be an 2D  array with a minimal size of 1*1
-	 requirement : pattern has to be an 2D  array with a minimal size of 1*1
+	 
+	 
 	 */
 	public static double[][] similarityMatrix(double[][] pattern, double[][] image) {
 
