@@ -27,6 +27,9 @@ public final class Main {
 		testFindNBest();
 		testDistanceBasedSearch();
 		testDistanceBasedSearchCanon();
+		testNCCPatternEqualImage();
+		testSimilarityPatternEqualImage();
+		testSimilaritySimple();
 		testSimilarityBasedSearch();
 		findCharlie();
 	}
@@ -169,6 +172,59 @@ public final class Main {
 	/*
 	 * Tests for Class SimilarityBasedSearch
 	 */
+	public static void testNCCPatternEqualImage() { 
+		System.out.println("Test NCCPatternEqualImage");
+		  double[][] pattern = {{ 0,   0, 0 },
+		                       { 0, 255, 0 },
+		                       { 0,   0, 0 }};
+		  double similarity = SimilarityBasedSearch.normalizedCrossCorrelation(0, 0, pattern, pattern);
+		  if (similarity == 1.0) {
+		    System.out.println("PASSED");      
+		  } else {
+		    System.out.println("ERROR: expected value 1.0 but was " + similarity);
+		  }
+		}
+	
+	public static void testSimilarityPatternEqualImage() { 
+		System.out.println("Test SimilarityPatternEqualImageh");
+		  double[][] pattern = {{ 0, 255}};
+		  double[][] similarity = SimilarityBasedSearch.similarityMatrix(pattern, pattern);
+		  if (similarity.length == 1) {
+		    if (similarity[0][0] == 1.0) {
+		      System.out.println("PASSED");
+		    } else {
+		      System.out.println("ERROR: expected value 1.0 but was " + similarity[0][0]);       
+		    }
+		  } else {
+		    System.out.println("ERROR: expected length 1 but was " + similarity.length);       
+		  }
+		}
+	
+	public static void testSimilaritySimple() {
+		System.out.println("Test SimilaritySimple");
+		  double[][] image = {{ 3, 2, 2, 2 },
+		                      { 0, 3, 0, 0 }};
+		  double[][] pattern = {{ 0, 3, 0}};
+		  double[][] similarity = SimilarityBasedSearch.similarityMatrix(pattern, image);
+		 
+		  if (similarity.length == 2 && similarity[0].length == 2) {
+		    if (similarity[0][0] == -0.5 && similarity[0][1] == -1.0 &&
+		        similarity[1][0] ==  1.0 && similarity[1][1] == -0.5) {
+		      System.out.println("PASSED");
+		    } else {
+		      System.out.println("ERROR: wrong values");
+		      for (int row = 0; row < similarity.length; row++) {
+		    	  for (int col = 0; col < similarity[0].length; col++) {
+					double display = similarity[row][col];
+					System.out.println(display);
+				}
+				
+			}
+		    }
+		  } else {
+		    System.out.println("ERROR: incorrect size");       
+		  }
+		}
 
 	public static void testSimilarityBasedSearch() {
 		System.out.println("Test SimilarityBasedSearch");
