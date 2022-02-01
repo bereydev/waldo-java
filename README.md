@@ -1,4 +1,4 @@
-# mini-projet01
+# First programmation project: waldo-java
 
 Mini-projet d'informatique, à rendre au plus tard le 13 novembre 2017.
 Le projet compte pour moitié de la note finale du premier semestre d'Introduction à la programation.
